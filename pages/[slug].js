@@ -18,6 +18,11 @@ export default function BlogId({blog}) {
 
 
 export const getStaticPaths = async () => {
+  const Page = ({ content }) => {
+    if (!content) {
+      return <ErrorPage />;
+    }
+  }
   const key = {
     headers: {'X-API-KEY': process.env.API_KEY},
   };
