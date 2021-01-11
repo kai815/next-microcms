@@ -26,11 +26,11 @@ export const getStaticPaths = async () => {
   const key = {
     headers: {'X-API-KEY': process.env.API_KEY},
   };
-  
+
   const data = await fetch('https://hideo.microcms.io/api/v1/blog', key)
     .then(res => res.json())
     .catch(() => null);
-  
+
   const paths = data.contents.map(content => `/blog/${content.id}`);
   return {paths, fallback: false};
 };
@@ -42,7 +42,7 @@ export const getStaticProps = async (context) => {
   `https://hideo.microcms.io/api/v1/blog/${slug}${
     draftKey !== undefined ? `?draftKey=${draftKey}` : ''
   }`,
-  { headers: { 'X-API-KEY': process.env.apiKey || '' } }
+  { headers: { 'X-API-KEY': process.env.API_KEY || '' } }
   )
   .then((res) => res.json());
   return {
